@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    working_dir: /app
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-admin
+    ports:
+      - 8080:8080
+    working_dir: /app
+    
+  db:
+    image: mysql:5.7.22
+    restart: always
+    environment:
+      MYSQL_DATABASE: eclinic
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./dbdata:/var/lib/mysql

@@ -1,0 +1,7 @@
+FROM node:latest
+RUN npm install -g npm@7.19.1
+# RUN npm install
+WORKDIR /app
+ADD ./eclinic_admin/package.json /app
+EXPOSE 8080
+CMD ["npm","run","dev"]
